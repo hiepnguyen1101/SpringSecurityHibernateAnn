@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.gcs.rms.model.Users;
+import com.gcs.rms.model.User;
 
 @Repository 
 public class UserDaoImpl implements UserDao {
@@ -16,11 +16,11 @@ public class UserDaoImpl implements UserDao {
 	SessionFactory sessionFactory;
 	
 	@SuppressWarnings("unchecked")
-	public Users findByUserName(String username) {
-		List<Users> users = new ArrayList<Users>();
+	public User findByUserName(String username) {
+		List<User> users = new ArrayList<User>();
 		users = sessionFactory.getCurrentSession()
-				.createSQLQuery("select {users.*} from users {users} where username=?")
-				.addEntity("users",Users.class)
+				.createSQLQuery("select * from [user] where user_name=?")
+				.addEntity("user",User.class)
 				.setParameter(0, username)
 				.list(); 
 

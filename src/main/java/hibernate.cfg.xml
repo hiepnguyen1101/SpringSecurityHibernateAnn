@@ -11,7 +11,8 @@
         <property name="hibernate.connection.username">sa</property>
         <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
-        <mapping class="com.gcs.rms.model.UserRoles" />
-        <mapping class="com.gcs.rms.model.Users" />
+        <mapping class="com.gcs.rms.model.UserRole" />
+        <mapping class="com.gcs.rms.model.Role" />
+        <mapping class="com.gcs.rms.model.User" />
     </session-factory>
 </hibernate-configuration>

@@ -1,5 +1,7 @@
 package com.gcs.rms.repository;
-import com.gcs.rms.model.Users;
+
+import com.gcs.rms.model.User;
+
 public interface UserDao {
-	Users findByUserName(String username);
+	User findByUserName(String username);
 }

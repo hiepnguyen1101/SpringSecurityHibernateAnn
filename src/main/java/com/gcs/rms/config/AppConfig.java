@@ -1,6 +1,7 @@
 package com.gcs.rms.config;
 
 import java.util.Properties;
+
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
@@ -14,53 +15,53 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+
 @EnableWebMvc
 @Configuration
 @ComponentScan({ "com.gcs.rms.*" })
 @EnableTransactionManagement
 @Import({ SecurityConfig.class })
-public class AppConfig {
+public class AppConfig {	
+	
+	@Bean
+	public SessionFactory sessionFactory() {
+		LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(
+				dataSource());
+		builder.scanPackages("com.gcs.rms.model").addProperties(
+				getHibernateProperties());
 
-        @Bean
-        public SessionFactory sessionFactory() {
-                LocalSessionFactoryBuilder builder =
-			new LocalSessionFactoryBuilder(dataSource());
-                builder.scanPackages("com.gcs.rms.model")
-                      .addProperties(getHibernateProperties());
-
-                return builder.buildSessionFactory();
-        }
-
+		return builder.buildSessionFactory();
+	}
+	
 	private Properties getHibernateProperties() {
-                Properties prop = new Properties();
-                prop.put("hibernate.format_sql", "true");
-                prop.put("hibernate.show_sql", "true");
-                prop.put("hibernate.dialect",
-                    "org.hibernate.dialect.SQLServer2012Dialect");
-                return prop;
-        }
-
+		Properties prop = new Properties();
+		prop.put("hibernate.format_sql", "true");
+		prop.put("hibernate.show_sql", "true");
+		prop.put("hibernate.dialect",
+				"org.hibernate.dialect.SQLServer2012Dialect");
+		return prop;
+	}
+	
 	@Bean(name = "dataSource")
 	public BasicDataSource dataSource() {
 
 		BasicDataSource ds = new BasicDataSource();
-	        ds.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		ds.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		ds.setUrl("jdbc:sqlserver://localhost:1433;databaseName=demo");
 		ds.setUsername("sa");
 		ds.setPassword("sinceY2k");
 		return ds;
 	}
-
-	//Create a transaction manager
+	
+	// Create a transaction manager
 	@Bean
-        public HibernateTransactionManager txManager() {
-                return new HibernateTransactionManager(sessionFactory());
-        }
+	public HibernateTransactionManager txManager() {
+		return new HibernateTransactionManager(sessionFactory());
+	}
 
 	@Bean
 	public InternalResourceViewResolver viewResolver() {
-		InternalResourceViewResolver viewResolver
-                             = new InternalResourceViewResolver();
+		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		viewResolver.setViewClass(JstlView.class);
 		viewResolver.setPrefix("/WEB-INF/pages/");
 		viewResolver.setSuffix(".jsp");
