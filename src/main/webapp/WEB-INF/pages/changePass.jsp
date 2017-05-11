@@ -38,7 +38,8 @@
 </head>
 <body onload='document.loginForm.username.focus();'>
 
-	<h1>RMS</h1>
+	<h1>Spring Security Login Form (Database + Hibernate
+		Authentication)</h1>
 
 	<div id="login-box">
 
@@ -52,39 +53,31 @@
 		<c:if test="${not empty error}">
 			<div class="error">${error}</div>
 		</c:if>
-		<c:if test="${not empty msg}">
-			<div class="msg">${msg}</div>
+		<c:if test="${not empty message}">
+			<div class="msg">${message}</div>
 		</c:if>
 
-		<form name='loginForm' action="<c:url value='/login' />" method='POST'>
-
+		<form name='changePassForm' action="<c:url value='/processChangePass' />" method='POST'>
 			<table>
 				<tr>
 					<td>User:</td>
 					<td><input type='text' name='username'></td>
 				</tr>
 				<tr>
-					<td>Password:</td>
-					<td><input type='password' name='password' /></td>
+					<td>Old Password:</td>
+					<td><input type='password' name='oldPass' /></td>
 				</tr>
 				<tr>
-					<td colspan='2'>
-						<label>
-						<input type="checkbox" id="rememberme" name="remember-me"> 
-						Remember Me
-						</label>  
-					</td>
+					<td>New Password:</td>
+					<td><input type='password' name='newPass' /></td>
 				</tr>
-
 				<tr>
 					<td colspan='2'><input name="submit" type="submit"
-						value="submit" /></td>
+						value="Change" /></td>
 				</tr>
 			</table>
-
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
-
 		</form>
 	</div>
 
