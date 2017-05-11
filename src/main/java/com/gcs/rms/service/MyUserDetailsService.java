@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gcs.rms.model.UserRole;
-import com.gcs.rms.model.UserRoles;
 import com.gcs.rms.repository.UserDao;
 
 @Service("userDetailsService")

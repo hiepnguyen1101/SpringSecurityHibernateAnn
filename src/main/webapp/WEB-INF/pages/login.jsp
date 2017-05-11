@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page isELIgnored="false" %>
+<%@ page isELIgnored="false"%>
 <%@page session="true"%>
 <html>
 <head>
@@ -38,7 +38,8 @@
 </head>
 <body onload='document.loginForm.username.focus();'>
 
-	<h1>Spring Security Login Form (Database + Hibernate Authentication)</h1>
+	<h1>Spring Security Login Form (Database + Hibernate
+		Authentication)</h1>
 
 	<div id="login-box">
 
@@ -56,8 +57,7 @@
 			<div class="msg">${msg}</div>
 		</c:if>
 
-		<form name='loginForm'
-			action="<c:url value='/login' />" method='POST'>
+		<form name='loginForm' action="<c:url value='/login' />" method='POST'>
 
 			<table>
 				<tr>
@@ -68,6 +68,15 @@
 					<td>Password:</td>
 					<td><input type='password' name='password' /></td>
 				</tr>
+				<tr>
+					<td colspan='2'>
+						<label>
+						<input type="checkbox" id="rememberme" name="remember-me"> 
+						Remember Me
+						</label>  
+					</td>
+				</tr>
+
 				<tr>
 					<td colspan='2'><input name="submit" type="submit"
 						value="submit" /></td>

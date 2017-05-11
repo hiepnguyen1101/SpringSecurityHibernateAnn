@@ -5,7 +5,7 @@
 <body>
 	<h1>Title : ${title}</h1>
 	<h1>Message : ${message}</h1>
-
+<%-- 
 	<c:url value="/logout" var="logoutUrl" />
 	<form action="${logoutUrl}" method="post" id="logoutForm">
 		<input type="hidden" name="${_csrf.parameterName}"
@@ -15,12 +15,13 @@
 		function formSubmit() {
 			document.getElementById("logoutForm").submit();
 		}
-	</script>
+	</script> --%>
 
 	<c:if test="${pageContext.request.userPrincipal.name != null}">
 		<h2>
-			Welcome : ${pageContext.request.userPrincipal.name} | <a
-				href="javascript:formSubmit()"> Logout</a>
+			Welcome : ${pageContext.request.userPrincipal.name} | 
+			<!-- <a href="javascript:formSubmit()"> Logout</a> -->
+			<a href="<c:url value="/logout" />">Logout</a>
 		</h2>
 	</c:if>
 

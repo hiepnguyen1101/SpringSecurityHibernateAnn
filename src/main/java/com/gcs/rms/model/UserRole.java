@@ -1,6 +1,6 @@
 package com.gcs.rms.model;
 
-// Generated May 10, 2017 9:05:26 PM by Hibernate Tools 4.0.0
+// Generated May 11, 2017 11:59:54 PM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
