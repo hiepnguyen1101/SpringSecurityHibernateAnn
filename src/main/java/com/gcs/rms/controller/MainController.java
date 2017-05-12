@@ -27,15 +27,19 @@ public class MainController {
 	@Autowired
 	IAcccountService iAcccountService;
 	
-	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public ModelAndView defaultPage() {
-
 		ModelAndView model = new ModelAndView();
-		model.addObject("title", "RMS");
-		model.addObject("message", "This is default page!");
-		model.setViewName("hello");
-		return model;
-
+		if(getPrincipal()!=null){
+			model.addObject("title", "RMS");
+			model.addObject("message", "This is default page!");
+			model.setViewName("hello");
+			return model;
+		}
+		else{		
+			model.setViewName("redirect:/login?message=You not yet logged in!");
+			return model;
+		}
 	}
 
 	@RequestMapping(value = "/admin/**", method = RequestMethod.GET)

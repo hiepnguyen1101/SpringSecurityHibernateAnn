@@ -47,17 +47,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.sessionManagement()
 				.invalidSessionUrl("/login?invalidSession=true");
-
+		http.authorizeRequests().antMatchers("/**").access("hasAnyRole('ROLE_Manager', 'ROLE_HR')");
+		
 		http.authorizeRequests().antMatchers("/admin/**")
 				.access("hasRole('ROLE_Manager')").and().formLogin()
-				.loginPage("/login").failureUrl("/login?error=true")
+				.loginPage("/login").permitAll()
+				.failureUrl("/login?error=wrong user name and password")
 				.usernameParameter("username").passwordParameter("password")
 				.defaultSuccessUrl("/welcome", true).and().logout()
 				.logoutSuccessUrl("/login?logout=true").and().rememberMe()
 				.rememberMeParameter("remember-me")
 				.tokenRepository(persistentTokenRepository())
 				.tokenValiditySeconds(86400)
-
 				.and().csrf().and().exceptionHandling()
 				.accessDeniedPage("/403");
 	}
